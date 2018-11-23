@@ -2,5 +2,4 @@
 #ignore log files in DataMining
 DataMining/M_Miner_OSM/logs/
 
-#ignore JS Sources
-M_Weboutput/js/sources/
+DataMining/M_DBIngest.py

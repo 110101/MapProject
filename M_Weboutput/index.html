@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- meta tags-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="css/mainstyle.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="leaflet/leaflet.css"/>
+</head>
+<body>
+<header></header>
+<div id="main">
+	<nav id="nav">
+			<div id="navbar">
+				<div id="menu">
+					<ul>
+						<li><div id="smalllogo">Logo</div></li>
+							<li><button data-toggle="collapse" href="#collapse-about" aria-expanded="false" aria-controls="collapse-about">About</button></li>
+						<li><input class="form-control" type="text" placeholder="Enter City or Postcode" id="example-text-input"></li>
+						<li><a class="btn btn-primary" data-toggle="collapse" href="#collapse-layer" role="button" aria-expanded="false" aria-controls="collapse-layer">Set Layer</a></li>
+						<li><a href="#" id="locateuser">locate</a></li>
+					</ul>
+				</div>
+				<div class="collapse" id="collapse-layer">
+					<div id="layer-content">
+					<ul>
+						<li>Preise</li>
+						<li>Hipster faktor</li>
+					</ul>
+					</div>
+				</div>
+		</div>
+	</nav>
+
+
+	<div id="map"></div>
+	
+	<!-- about -->
+	<div class="collapse" id="collapse-about">
+		<div id="about-content">
+			<button class="btn" href="#collapse-about" data-toggle="collapse" aria-controls="collapse-about" aria-controls="layer-hide">x</button>
+		</div>
+	</div>
+</div>
+<div id="footer">
+		<div class="footer_content">&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</div> 
+</div>
+</body>
+<!-- js script section-->
+<script src="js/heatmap.js"></script> 
+<script src="leaflet/leaflet.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/leaflet-heatmap.js"></script> 
+<script src="js/stamen.js"></script>
+<script src="JSON/Grid_Munich.json"></script>
+<script src="js/leafletembedded.js"></script>
+
+
+
+<script type="text/javascript">
+        	initmap();
+       
+        	document.getElementById("locateuser").onclick = function () { locate_user(); };
+</script>
+
+</html>

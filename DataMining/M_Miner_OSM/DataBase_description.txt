@@ -1,0 +1,5 @@
+<data base features>
+
+country, city, name, type, lat, lon, adresse, stadteil, source, copyright/License, osm_id, add_field2
+bsp. osm
+99, Organic, Germany, Munich, Denn's Bio, supermarket, 49.11, 11.8, Fuenf Hoefe, Lehel, miner_openstreetmap, osm licenes, osm id

@@ -1,0 +1,13 @@
+/*demo GeoJson Munich*/
+var city_grid = {"type":"FeatureCollection","features": 
+	[{
+		"type":"Feature",
+		"id":"01","properties":{
+			"name":"001001","density":94.65
+		},
+		"geometry":{
+			"type":"Polygon",
+			"coordinates":[[
+			[48.14408,11.578504],[48.143249,11.582968],[48.141531,11.582238],[48.14239,11.578247]
+	]]}}
+]}

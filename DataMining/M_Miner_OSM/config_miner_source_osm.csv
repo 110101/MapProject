@@ -1,0 +1,3 @@
+api_url,country,area,osm_area_id,key_string,key_value
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,organic,only
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,pub
