@@ -68,4 +68,8 @@ def osm_get_citybox():
     city_maxlon = query_output[1][0]['bounds']['maxlon']
 
     # Ergebnis eigentlich in Datenbank packen Tabelle "CityBoxes"
+    print(city_minlat, city_maxlat, city_minlon, city_maxlon)
     return {'minlat': city_minlat, 'maxlat': city_maxlat, 'minlon': city_minlon, 'maxlon': city_maxlon}
+
+
+osm_get_citybox()
