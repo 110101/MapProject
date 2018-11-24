@@ -44,23 +44,21 @@ function initmap(){
 
 	function style(feature){
 		return {
-		fillColor: setColor(feature.properties.index), //'#786590',
+		fillColor: setColor(feature.properties.calcindex), //'#786590',
 		weight: 0,
         opacity: 0,
-        fillOpacity: setFillOpac(feature.properties.index)
+        fillOpacity: setFillOpac(feature.properties.calcindex)
     	};
 	}
 
 	/* bisher keine Verwendung */
-	var city = cities;
+	// var city = cities;
 
 	/* Grid aus geoJson auf Karte legen */
 	L.geoJson(city_grid, {style: style}).addTo(map);
 	map.addLayer(tilelayer);
 	
 	//map.on('click', viewPos);
-
-
 }
 
 function locate_user(){
@@ -80,7 +78,6 @@ function locate_user(){
         //map.on('movestart', onMoveStart);
 	}
 	map.on('locationfound', onLocationFound);
-
 }
 
 function viewPos(e){
@@ -88,4 +85,5 @@ function viewPos(e){
 	alert(location[1]);
 }
 
-map.on('zoomout', onMoveStart);
+// Wenn zu weit rausgezoomt wird Kreis bei Stadt anzeigen
+//map.on('zoomout', onMoveStart);
