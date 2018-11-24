@@ -6,7 +6,7 @@ import requests
 #Synergie mit OSM Miner nur weil CityBox aus Kartendaten kommen
 #Abfrage eigentlich nur 1 mal notwendig
 
-def osm_querry_config():
+def osm_querry_config(city):
     querrys = []
     keywords = []
    # with open("/M_Miner_OSM/config_miner_source_osm.csv", "r") as configfile:
@@ -15,7 +15,11 @@ def osm_querry_config():
    # for query_row in userFileReader:
     #setup querry for overpass api
     osm_id_convert = 3600000000
-    city_id = 62428 #int(query_row['osm_area_id'])
+
+    if city == "Munich":
+        city_id = 62428 #int(query_row['osm_area_id'])
+    else:
+        city_id = 0
     #query_string = '"' + query_row['key_string'] + '"="' + query_row['key_value'] + '"'
 
 
@@ -55,8 +59,8 @@ def osm_querry(query_request, query_keyword):
                 return ["empty", "none", log_type]
 
 
-def osm_get_citybox():
-    query_input, query_keywords = osm_querry_config()
+def osm_get_citybox(city):
+    query_input, query_keywords = osm_querry_config(city)
 
     query_output = osm_querry(query_input, query_keywords)
     query_output_data = query_output[1]
@@ -70,6 +74,3 @@ def osm_get_citybox():
     # Ergebnis eigentlich in Datenbank packen Tabelle "CityBoxes"
     print(city_minlat, city_maxlat, city_minlon, city_maxlon)
     return {'minlat': city_minlat, 'maxlat': city_maxlat, 'minlon': city_minlon, 'maxlon': city_maxlon}
-
-
-osm_get_citybox()

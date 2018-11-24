@@ -10,7 +10,7 @@ import os
 def osm_querry_config():
     querrys = []
     keywords = []
-    with open("M_Miner_OSM/config_miner_source_osm.csv", "r") as configfile:
+    with open("config_miner_source_osm.csv", "r") as configfile:
         userFileReader = csv.DictReader(configfile)
 
         for query_row in userFileReader:
