@@ -16,7 +16,7 @@ dataset = [{'id':1,'index':20,'coordinates':[[11.55830,48.16],[11.56830,48.16],[
            ]
 cityname = "Munich"
 
-def data2geoJson (cityname, dataset):
+def data2geoJson (dataset):
     geojson = {'type':'FeatureCollection','features':[]}
     for i in range(len(dataset)):
         feat = {'type':'Feature','id':'' + str(dataset[i]['id']) + '','properties':{'calcindex': dataset[i]['index']},'geometry':{'type':'Polygon','coordinates': [dataset[i]['coordinates']]}}
