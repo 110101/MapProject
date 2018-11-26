@@ -1,3 +1,5 @@
+### Needs to be reworked!
+
 # Hauptloop
 # Aufruf der einzelnen Miner Module und Ingest
 # bis loop steht Datei für Testaufrufe
