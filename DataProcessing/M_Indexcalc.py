@@ -6,7 +6,7 @@ from DataProcessing import M_Data2geoJSON as D2GJ
 
 #get city dimensions and calc number of bins (gridesize in meters, cityname in en)
 # return is [adjcitydim, dataset]
-gridsize = 5000 # in meters
+gridsize = 500 # in meters
 citygrid = ccg.calcgrid(gridsize, "Munich")
 
 
