@@ -1,4 +1,5 @@
 import mysql.connector
+import pandas as pd
 
 class POI_data:
 
@@ -25,12 +26,11 @@ class POI_data:
             self.addfield1 = addfield1
 
 
-def pull_data(keyword):
+def pull_data(sql_table, cat, city):
     mysql_connection = mysql.connector.connect(host='localhost',database='POI_data',user='root',password='timsa110101')
     mysql_cursor = mysql_connection.cursor()
 
-    sql_tabel = "pois_germany"
-    sqL_query_string ="SELECT " + keyword + " FROM " + sql_tabel
+    sqL_query_string ="SELECT * FROM " + sql_table + " WHERE city = '" + city + "' AND cat = '" + cat + "'"
 
     print(sqL_query_string)
 
@@ -38,13 +38,11 @@ def pull_data(keyword):
 
     try:
         mysql_cursor.execute(sqL_query_string,)
-        sql_query_feedback = mysql_cursor.fetchall()
+        df_sql_output = pd.DataFrame(mysql_cursor.fetchall())
+        df_sql_output.columns = mysql_cursor.column_names
         mysql_cursor.close()
 
-        print(sql_query_feedback)
-
-
-        pois = [POI_data(c[0],c[1],c[2],c[3],c[4],c[5],c[6],c[7],c[8],c[9],c[10],c[11],c[12],c[13],c[14],c[15]) for c in sql_query_feedback]
+        #pois = [POI_data(c[0],c[1],c[2],c[3],c[4],c[5],c[6],c[7],c[8],c[9],c[10],c[11],c[12],c[13],c[14],c[15]) for c in sql_query_feedback]
 
         #for feedback_row in sql_query_feedback:
             #print(len(sql_query_feedback))
@@ -64,7 +62,7 @@ def pull_data(keyword):
              switches = [Switch(c[1], c[2]) for c in config]'''
 
 
-        return pois
+        return df_sql_output
     except:
         mysql_connection.rollback()
         print("error")
@@ -72,10 +70,3 @@ def pull_data(keyword):
     mysql_connection.close()
 
 
-
-
-poi_sql = pull_data("*")
-
-print(len(poi_sql))
-
-print(poi_sql[780].country)

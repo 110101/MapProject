@@ -42,7 +42,7 @@ def calcgrid(gridsize_m,cityname):
     #databins.append()
 
 
-    cols =[ 'binid','lon1','lat1','lon2','lat2','value']
+    cols =[ 'binid','lon1','lat1','lon2','lat2','value','valuepercent']
     df2=[]
     for r in range(maxbins_lat):
         latval1 = adjcitydim['maxlat'] - (gridsize * r)
@@ -52,11 +52,13 @@ def calcgrid(gridsize_m,cityname):
             lonval2 = round(adjcitydim['minlon'] + (gridsize * (c+1)),6)
             #print(lonval1, latval1, lonval2, latval2)
             binid = 'R' + str(r+1) + 'N' + str(c+1)
-            dummyvalue = np.random.randint(10,100)
-            d = {'binid': binid, 'lon1': lonval1, 'lat1': latval1, 'lon2': lonval2, 'lat2': latval2, 'value': dummyvalue}
-            print(d['value'])
+            #dummyvalue = np.random.randint(10,100)
+            dummyvalue = 0
+            d = {'binid': binid, 'lon1': lonval1, 'lat1': latval1, 'lon2': lonval2, 'lat2': latval2, 'value': dummyvalue, 'valuepercent': dummyvalue}
+            #print(d['value'])
             df2.append(d)
     df3 = pd.DataFrame(df2, columns=cols)
     df3.value = df3.value.astype('float')
+    df3.valuepercent = df3.valuepercent.astype('float')
    # print(databins.head())
     return [adjcitydim, df3]

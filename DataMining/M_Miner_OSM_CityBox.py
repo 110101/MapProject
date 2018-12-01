@@ -1,5 +1,6 @@
 import csv
 import requests
+import pandas as pd
 
 #eigentlich Teil von Dataprocessing
 #Citybox wird als Input für Dataprocessing benötigt
@@ -17,7 +18,13 @@ def osm_querry_config(city):
     osm_id_convert = 3600000000
 
     if city == "Munich":
-        city_id = 62428 #int(query_row['osm_area_id'])
+        city_id01 = 62428 #int(query_row['osm_area_id'])
+        osm_id_convert = osm_id_convert + city_id01
+        level = 6
+    elif city == "Berlin":
+        city_id02 = 62422
+        osm_id_convert = osm_id_convert + city_id02
+        level = 4
     else:
         city_id = 0
     #query_string = '"' + query_row['key_string'] + '"="' + query_row['key_value'] + '"'
@@ -25,9 +32,9 @@ def osm_querry_config(city):
 
     overpass_query = """
         [out:json][timeout:300];
-        area(""" + str(osm_id_convert+city_id) + """)->.searchArea;
+        area(""" + str(osm_id_convert) + """)->.searchArea;
         (
-        rel['admin_level'='6'](area.searchArea);
+        rel['admin_level'='""" + str(level) + """'](area.searchArea);
         );
         out body bb;"""
     querrys.append(overpass_query)
@@ -66,11 +73,32 @@ def osm_get_citybox(city):
     query_output_data = query_output[1]
 
     #citybox als klasse?
-    city_minlat = query_output[1][0]['bounds']['minlat']
-    city_maxlat = query_output[1][0]['bounds']['maxlat']
-    city_minlon = query_output[1][0]['bounds']['minlon']
-    city_maxlon = query_output[1][0]['bounds']['maxlon']
+
+    city_lat = []
+    city_lon = []
+    for i in range(len(query_output)):
+
+        minlat = query_output[1][0]['bounds']['minlat']
+        maxlat = query_output[1][0]['bounds']['maxlat']
+        minlon = query_output[1][0]['bounds']['minlon']
+        maxlon = query_output[1][0]['bounds']['maxlon']
+
+        city_lon.append(maxlon)
+        city_lon.append(minlon)
+        city_lat.append(maxlat)
+        city_lat.append(minlat)
+
+    df_lat = pd.DataFrame(city_lat)
+    df_lat.columns = ['A']
+    df_lon = pd.DataFrame(city_lon)
+    df_lon.columns = ['A']
+
+    city_minlat = df_lat.min()
+    city_maxlat = df_lat.max()
+    city_minlon = df_lon.min()
+    city_maxlon = df_lon.max()
+
 
     # Ergebnis eigentlich in Datenbank packen Tabelle "CityBoxes"
-    print(city_minlat, city_maxlat, city_minlon, city_maxlon)
-    return {'minlat': city_minlat, 'maxlat': city_maxlat, 'minlon': city_minlon, 'maxlon': city_maxlon}
+    #print(city_minlat, city_maxlat, city_minlon, city_maxlon)
+    return {'minlat': city_minlat['A'], 'maxlat': city_maxlat['A'], 'minlon': city_minlon['A'], 'maxlon': city_maxlon['A']}

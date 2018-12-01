@@ -16,13 +16,13 @@ def osm_querry_config():
         for query_row in userFileReader:
             #setup querry for overpass api
             osm_id_convert = 3600000000
-            city_id = int(query_row['osm_area_id'])
+            city_id = osm_id_convert + int((query_row['osm_area_id']))
             query_string = '"' + query_row['key_string'] + '"="' + query_row['key_value'] + '"'
 
 
             overpass_query = """
                 [out:json][timeout:300];
-                area(""" + str(osm_id_convert+city_id) + """)->.searchArea;
+                area(""" + str(city_id) + """)->.searchArea;
                 (
                 node[""" + query_string + """](area.searchArea);
                 way[""" + query_string + """](area.searchArea);
@@ -88,7 +88,7 @@ def run_miner_OSM():
 
 
         #Erzeugen eines POI_Ingest Object instanz je POI Element
-        for x in range (0,1): #len(query_feedback_POI)
+        for x in range (len(query_feedback_POI)): #len(query_feedback_POI)
             new_POI_ingest = []
             timestamp_ingest_start = time.now()
 
@@ -102,27 +102,29 @@ def run_miner_OSM():
 
             #Data Filtering
             #Check ob sich der Eintrag schon in der Datenbankbefindet hinzüfgen
-            new_POI_ingest.data_check()
+            #new_POI_ingest.data_check()
+
+            new_POI_ingest.ingest_data()
 
             #Ingest von neuen Daten
             #new_POI_ingest.ingest_data()
             timestamp_ingest_fin = time.now()
         # hier noch erfolgreichen Ingest in Log File ergänzen, dann ist Miner final
-        if query_feedback[4] == "success":
-            log_type = "success"
-            dir = os.path.dirname(os.path.realpath(__file__))
-            logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "" + str(query_feedback[2]) + " Items fetched. Starting Ingest...")
-            return_value = "OSM Miner: success."
-            return return_value
-        elif query_feedback[4] == "err":
-            log_type = "err"
-            dir = os.path.dirname(os.path.realpath(__file__))
-            logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "no data fetched or ingested")
-            return_value = "OSM Miner: error. See log file."
-            return return_value
-        else:
-            log_type = "err"
-            dir = os.path.dirname(os.path.realpath(__file__))
-            logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "something gone really wrong")
-            return_value = "OSM Miner: fatal error. See log file."
-            return return_value
+        # if query_feedback[4] == "success":
+        #     log_type = "success"
+        #     dir = os.path.dirname(os.path.realpath(__file__))
+        #     logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "" + str(query_feedback[2]) + " Items fetched. Starting Ingest...")
+        #     return_value = "OSM Miner: success."
+        #     return return_value
+        # elif query_feedback[4] == "err":
+        #     log_type = "err"
+        #     dir = os.path.dirname(os.path.realpath(__file__))
+        #     logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "no data fetched or ingested")
+        #     return_value = "OSM Miner: error. See log file."
+        #     return return_value
+        # else:
+        #     log_type = "err"
+        #     dir = os.path.dirname(os.path.realpath(__file__))
+        #     logfile.writelog(log_type, dir, query_feedback[0], query_feedback[1], query_keywords[i], timestamp_ingest_start, timestamp_ingest_fin, "something gone really wrong")
+        #     return_value = "OSM Miner: fatal error. See log file."
+        #     return return_value
