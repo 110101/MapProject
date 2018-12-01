@@ -3,7 +3,7 @@ import time
 import datetime
 import numpy as np
 import pandas as pd
-from DataProcessing import M_DBAccess as DBA
+from DataProcessing import M_DBAccess as dba
 from DataProcessing import M_createcitygrid as ccg
 from DataProcessing import M_Data2geoJSON as d2gj
 
@@ -21,21 +21,27 @@ class city():
         self.data = citydata
         self.name = name
 
+
 cityarray = ["Munich","Berlin"]
 cols = ['binid', 'lon1', 'lat1', 'lon2', 'lat2', 'value', 'valuepercent']
 all_citybins = pd.DataFrame(columns=cols)
+bigdata = []
+cityname_de = ""
 
 for cityn in cityarray:
-    print("Start: " + cityn + str(datetime.datetime.now()))
+    # recording start time for logging
+    print("Start: " + cityn + " at " + str(datetime.datetime.now()))
+
+    # new city class / necessary?
     newcity = city()
 
-    #get city dimensions and calc number of bins (gridesize in meters, cityname in en)
+    # get city dimensions and calc number of bins (gridesize in meters, cityname in en)
     # return is [adjcitydim, dataset]
     cityname = cityn
-    gridsize = 1000 # in meters
+    gridsize = 1000  # in meters
     citygrid = ccg.calcgrid(gridsize, cityname)
 
-    #citygrid[0]: city dimensions ; citygrid[1]: dataframe containing bins and default index value
+    # citygrid[0]: city dimensions ; citygrid[1]: dataframe containing bins and default index value
     newcity.adddata(cityname, gridsize, citygrid[0], citygrid[1])
 
 
@@ -49,7 +55,7 @@ for cityn in cityarray:
     # Indexberechnung
     # get sql data
     # load data from source 1 "OSM" with Keyword "pub" into dataframe
-    sql_output_OSM_bar = DBA.pull_data(sql_table, keyword, cityname_de)
+    sql_output_OSM_bar = dba.pull_data(sql_table, keyword, cityname_de)
 
     if sql_output_OSM_bar is None:
         print("error")
@@ -61,6 +67,8 @@ for cityn in cityarray:
         citybins = []
         citybins = newcity.data
 
+        # Iterate over number of bins for the City in the citygrid data frame called citybins
+        # citybins.shape is the total number of bins
         for numberofbin in range(citybins.shape[0]):
             bin_index = 0
             lat1_bin = citybins.at[numberofbin, 'lat1']
@@ -72,13 +80,10 @@ for cityn in cityarray:
                 sql_lat = sql_output_OSM_bar.at[row_sql_out, 'lat']
                 sql_lon = sql_output_OSM_bar.at[row_sql_out, 'lon']
 
-
                 if (sql_lat <= lat1_bin) & (sql_lat >= lat2_bin) & (sql_lon >= lon1_bin) & (sql_lon <= lon2_bin):
-                    #print("yes")
                     bin_index = bin_index+1
-            #print(bin_index)
 
-            #prozent
+
             citybins.at[numberofbin, 'value'] = bin_index
 
             #prozent

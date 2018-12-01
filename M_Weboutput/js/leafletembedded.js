@@ -26,9 +26,9 @@ function initmap(){
 	//map.addLayer(osm);
 	function setColor(d){
 		return d > 90 ? '#06f6c6' :
-			   d > 80 ? '#0debc8' :
-			   d > 70 ? '#14e1cc' :
-			   d > 60 ? '#1bd5ce' :
+			   d > 80 ? '#0fe8ca' :
+			   d > 70 ? '#17dccd' :
+			   d > 60 ? '#1dd3cf' :
 			   d > 50 ? '#24c9d2' :
 			   d > 40 ? '#2dbcd5' :
 			   d > 30 ? '#34b1d7' :
