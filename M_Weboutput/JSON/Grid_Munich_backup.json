@@ -1,0 +1,20 @@
+/*demo GeoJson Munich*/
+var cities = 100;
+
+var city_grid = {"type":"FeatureCollection","features":[
+{"type":"Feature","id":"1","properties":{"index":50},"geometry":{"type":"Polygon","coordinates":[[[11.55830,48.16000],[11.56830,48.16000],[11.56830,48.15500],[11.55830,48.15500]]]}},
+{"type":"Feature","id":"2","properties":{"index":60},"geometry":{"type":"Polygon","coordinates":[[[11.56830,48.16000],[11.57830,48.16000],[11.57830,48.15500],[11.56830,48.15500]]]}},
+{"type":"Feature","id":"3","properties":{"index":90},"geometry":{"type":"Polygon","coordinates":[[[11.57830,48.16000],[11.58830,48.16000],[11.58830,48.15500],[11.57830,48.15500]]]}},
+
+{"type":"Feature","id":"4","properties":{"index":50},"geometry":{"type":"Polygon","coordinates":[[[11.55830,48.155],[11.56830,48.155],[11.56830,48.15],[11.55830,48.15]]]}},
+{"type":"Feature","id":"5","properties":{"index":60},"geometry":{"type":"Polygon","coordinates":[[[11.56830,48.155],[11.57830,48.155],[11.57830,48.15],[11.56830,48.15]]]}},
+{"type":"Feature","id":"6","properties":{"index":70},"geometry":{"type":"Polygon","coordinates":[[[11.57830,48.155],[11.58830,48.155],[11.58830,48.15],[11.57830,48.15]]]}},
+
+{"type":"Feature","id":"7","properties":{"index":40},"geometry":{"type":"Polygon","coordinates":[[[11.55830,48.15],[11.56830,48.15],[11.56830,48.145],[11.55830,48.145]]]}},
+{"type":"Feature","id":"8","properties":{"index":50},"geometry":{"type":"Polygon","coordinates":[[[11.56830,48.15],[11.57830,48.15],[11.57830,48.145],[11.56830,48.145]]]}},
+{"type":"Feature","id":"9","properties":{"index":60},"geometry":{"type":"Polygon","coordinates":[[[11.57830,48.15],[11.58830,48.15],[11.58830,48.145],[11.57830,48.145]]]}},
+
+{"type":"Feature","id":"7","properties":{"index":20},"geometry":{"type":"Polygon","coordinates":[[[11.55830,48.145],[11.56830,48.145],[11.56830,48.14],[11.55830,48.14]]]}},
+{"type":"Feature","id":"8","properties":{"index":70},"geometry":{"type":"Polygon","coordinates":[[[11.56830,48.145],[11.57830,48.145],[11.57830,48.14],[11.56830,48.14]]]}},
+{"type":"Feature","id":"9","properties":{"index":50},"geometry":{"type":"Polygon","coordinates":[[[11.57830,48.145],[11.58830,48.145],[11.58830,48.14],[11.57830,48.14]]]}},
+]};

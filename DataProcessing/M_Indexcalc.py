@@ -21,7 +21,7 @@ class city():
         self.data = citydata
         self.name = name
 
-cityarray = ["Munich"]
+cityarray = ["Munich","Berlin"]
 cols = ['binid', 'lon1', 'lat1', 'lon2', 'lat2', 'value', 'valuepercent']
 all_citybins = pd.DataFrame(columns=cols)
 
@@ -32,21 +32,23 @@ for cityn in cityarray:
     #get city dimensions and calc number of bins (gridesize in meters, cityname in en)
     # return is [adjcitydim, dataset]
     cityname = cityn
-    gridsize = 600 # in meters
+    gridsize = 1000 # in meters
     citygrid = ccg.calcgrid(gridsize, cityname)
 
     #citygrid[0]: city dimensions ; citygrid[1]: dataframe containing bins and default index value
     newcity.adddata(cityname, gridsize, citygrid[0], citygrid[1])
 
-    #Indexberechnung
-    #get sql data
-    #load data from source 1 "OSM" with Keyword "pub" into dataframe
+
     keyword = "pub"
     sql_table = "pois_germany"
     if cityname == "Munich":
         cityname_de = "München"
     elif cityname == "Berlin":
         cityname_de = "Berlin"
+
+    # Indexberechnung
+    # get sql data
+    # load data from source 1 "OSM" with Keyword "pub" into dataframe
     sql_output_OSM_bar = DBA.pull_data(sql_table, keyword, cityname_de)
 
     if sql_output_OSM_bar is None:
@@ -54,14 +56,6 @@ for cityn in cityarray:
     else:
         print("Found items in DB: " + str(sql_output_OSM_bar.shape[0]))
 
-        #print(sql_output_OSM_bar.at[0, 'lat'])
-        #print(sql_output_OSM_bar.head())
-
-        #source 2 into pandas dataframe
-
-        #source 3 into pandas dataframe
-
-        #calcformel
         #bins durch iterieren bin a - vergleich mit allen Quellen
         #bins für Stadt
         citybins = []
@@ -92,7 +86,7 @@ for cityn in cityarray:
         for numobins in range(citybins.shape[0]):
             citybins.at[numobins, 'valuepercent'] = (citybins.at[numobins, 'value'] / maxval_bin) * 100
 
-        #print(citybins.iloc[:,citybins.columns.get_indexer(['binid','value'])])
+        print(citybins.iloc[:,citybins.columns.get_indexer(['binid','value'])])
         # Check output
         print("Number of active bins:" + str(citybins.shape[0]))
 

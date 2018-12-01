@@ -20,7 +20,7 @@ def data2geoJson (dataset):
     geojson = {'type':'FeatureCollection','features':[]}
     ran = dataset.shape
     for i in range(ran[0]):
-        if dataset.at[i, 'valuepercent'] >= 10:
+        if dataset.at[i, 'valuepercent'] > 0:
             p1 = [dataset.at[i, 'lon1'], dataset.at[i, 'lat1']]
             p2 = [dataset.at[i, 'lon2'], dataset.at[i, 'lat1']]
             p4 = [dataset.at[i, 'lon2'], dataset.at[i, 'lat2']]

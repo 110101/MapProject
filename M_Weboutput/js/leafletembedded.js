@@ -13,7 +13,7 @@ var defaultlong = 11.585537;
 
 function initmap(){
 	
-	var tilelayer = new L.StamenTileLayer("toner");
+	var tilelayer = new L.StamenTileLayer("terrain");
 	tilelayer.options.maxZoom = 20;
 	tilelayer.options.minZoom = 1; //12
 
@@ -25,20 +25,22 @@ function initmap(){
 	//var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 18, attribution: osmAttrib, subdomains: ['a','b']});		
 	//map.addLayer(osm);
 	function setColor(d){
-		return d > 90 ? '#a50026' :
-			   d > 80 ? '#d73027' :
-			   d > 70 ? '#f46d43' :
-			   d > 60 ? '#f46d43' :
-			   d > 50 ? '#fdae61' :
-			   d > 40 ? '#fee08b' :
-			   d > 30 ? '#d9ef8b' :
-			   d > 10 ? '#a6d96a' :
-			            '#e0e0e0' ;
+		return d > 90 ? '#06f6c6' :
+			   d > 80 ? '#0debc8' :
+			   d > 70 ? '#14e1cc' :
+			   d > 60 ? '#1bd5ce' :
+			   d > 50 ? '#24c9d2' :
+			   d > 40 ? '#2dbcd5' :
+			   d > 30 ? '#34b1d7' :
+			   d > 20 ? '#3da5da' :
+			   d > 10 ? '#4795de' :
+			            '#3e88d4' ;
 		}
 	
 	function setFillOpac (d){
-		return d > 10 ? '0.7' :
-						'0.4' ;
+		return d > 50 ? '0.9' :
+			   d > 30 ? '0.9' :
+						'0.6' ;
 	}
 
 
