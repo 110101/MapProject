@@ -1,4 +1,10 @@
 api_url,country,area,osm_area_id,key_string,key_value
-https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,organic,only
 https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,pub
-https://overpass-api.de/api/interpreter,Germany,Berlin,62422,amenity,pub
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,bar
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,nightclub
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,cafe
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,restaurant
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,cinema
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,amenity,theatre
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,organic,only
+https://overpass-api.de/api/interpreter,Germany,Muenchen,62428,shop,coffee

@@ -85,7 +85,9 @@ def run_miner_OSM():
         # DB Ingest <Ende vom Modul Miner>
         query_feedback_POI = query_feedback[3]
 
-
+        # Needs to be adjusted for MultiCity approch
+        # Data from each city in separte SQL Table
+        sql_table = "data_munich"
 
         #Erzeugen eines POI_Ingest Object instanz je POI Element
         for x in range (len(query_feedback_POI)): #len(query_feedback_POI)
@@ -98,13 +100,13 @@ def run_miner_OSM():
             #Data Processing
             new_POI_ingest.process_data_OSM(query_keywords[i], query_feedback_POI[x],query_feedback[0],query_feedback[1])
 
-            print(new_POI_ingest.timestamp, new_POI_ingest.city, new_POI_ingest.name, new_POI_ingest.lat, new_POI_ingest.lon, new_POI_ingest.type, new_POI_ingest.cat, new_POI_ingest.postcode, new_POI_ingest.opening_hours)
+            #print(new_POI_ingest.timestamp, new_POI_ingest.city, new_POI_ingest.name, new_POI_ingest.lat, new_POI_ingest.lon, new_POI_ingest.type, new_POI_ingest.cat, new_POI_ingest.postcode, new_POI_ingest.opening_hours)
 
             #Data Filtering
             #Check ob sich der Eintrag schon in der Datenbankbefindet hinzüfgen
             #new_POI_ingest.data_check()
 
-            new_POI_ingest.ingest_data()
+            new_POI_ingest.ingest_data(sql_table)
 
             #Ingest von neuen Daten
             #new_POI_ingest.ingest_data()

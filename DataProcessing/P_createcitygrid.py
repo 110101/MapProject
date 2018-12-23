@@ -1,6 +1,8 @@
 # Creating a Grid for each analysed city based on the map city box fetched from OSM
 import pandas as pd
 import math
+import os
+import json
 from DataMining import M_Miner_OSM_CityBox as citybox
 import numpy as np
 
@@ -62,3 +64,34 @@ def calcgrid(gridsize_m,cityname):
     df3.valuepercent = df3.valuepercent.astype('float')
    # print(databins.head())
     return [adjcitydim, df3]
+
+def data2geoJson (dataset, cityarray):
+    geojson = {'type':'FeatureCollection','features':[]}
+    ran = dataset.shape
+    for i in range(ran[0]):
+        if dataset.at[i, 'valuepercent'] > 0:
+            p1 = [dataset.at[i, 'lon1'], dataset.at[i, 'lat1']]
+            p2 = [dataset.at[i, 'lon2'], dataset.at[i, 'lat1']]
+            p4 = [dataset.at[i, 'lon2'], dataset.at[i, 'lat2']]
+            p3 = [dataset.at[i, 'lon1'], dataset.at[i, 'lat2']]
+            coords = [p1,p2,p4,p3]
+            # feat = {'type':'Feature','id':'' + str(dataset[i]['id']) + '','properties':{'calcindex': dataset[i]['index']},'geometry':{'type':'Polygon','coordinates': [dataset[i]['coordinates']]}}
+            feat = {'type': 'Feature', 'id': dataset.at[i, 'binid'],
+                    'properties': {'calcindex': dataset.at[i, 'valuepercent']},
+                    'geometry': {'type': 'Polygon', 'coordinates': [ coords ]}}
+            # print(feat)
+            geojson['features'].append(feat)
+            # print(geojson)
+
+    syspath = os.path.dirname(os.path.dirname(__file__))
+    exportpath = syspath + "/M_Weboutput/JSON/"
+    filename = "Grid_Munich.json"
+
+    if os.path.exists(exportpath):
+        with open(exportpath + filename, 'w') as output:
+            output.write('var city_array= ' + str(cityarray) + '\n')
+            output.write('var city_grid = ')
+            json.dump(geojson, output, indent=2)
+        print("geoJSON success")
+    else:
+        print("fatal error in creating geoJSON")

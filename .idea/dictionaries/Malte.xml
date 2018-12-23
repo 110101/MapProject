@@ -1,9 +1,16 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="Malte">
+  <dictionary name="malte">
     <words>
-      <w>citygrid</w>
-      <w>dataframe</w>
-      <w>indexberechnung</w>
+      <w>bigdata</w>
+      <w>binid</w>
+      <w>cityarray</w>
+      <w>citybins</w>
+      <w>cityn</w>
+      <w>exportdir</w>
+      <w>newcity</w>
+      <w>starttime</w>
+      <w>stoptime</w>
+      <w>valuepercent</w>
     </words>
   </dictionary>
 </component>

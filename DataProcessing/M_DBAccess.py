@@ -32,7 +32,7 @@ def pull_data(sql_table, cat, city):
 
     sqL_query_string ="SELECT * FROM " + sql_table + " WHERE city = '" + city + "' AND cat = '" + cat + "'"
 
-    print(sqL_query_string)
+    #print(sqL_query_string)
 
     #ingest_args = (self.timestamp, self.source, self.country, self.city, self.cat, self.name, self.type, self.addr, self.addr_nr, self.postcode, self.lat, self.lon, self.osm_id, self.opening_hours, self.addfield1)
 

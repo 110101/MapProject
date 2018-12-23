@@ -17,7 +17,7 @@ def osm_querry_config(city):
     #setup querry for overpass api
     osm_id_convert = 3600000000
 
-    if city == "Munich":
+    if city == "Muenchen":
         city_id01 = 62428 #int(query_row['osm_area_id'])
         osm_id_convert = osm_id_convert + city_id01
         level = 6
