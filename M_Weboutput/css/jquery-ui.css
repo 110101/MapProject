@@ -91,7 +91,7 @@ a.ui-button:active,
 .ui-button.ui-state-active:hover {
 	border: 1px solid #003eff;
 	margin-left: -0.75rem;
-	padding-left: 0.75rem;
+	padding-left: 0.7rem;
 	background: #007fff;
 	font-weight: normal;
 	color: #ffffff;
